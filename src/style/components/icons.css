@@ -1,0 +1,12 @@
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.iconLarge {
+  margin-bottom: 1rem;
+}
+
+.iconDefault {
+  margin-right: 0.5rem;
+}
