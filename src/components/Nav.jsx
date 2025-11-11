@@ -18,16 +18,12 @@ function Nav() {
           <>
             <span className="main-nav-username">userName</span>
             
-            <span className="main-nav-item"
-              style={{ cursor: 'pointer' }}
-            >
-              Sign out
-            </span>
+            <span className="main-nav-item">Sign out</span>
           </>
         
-          <NavLink className="main-nav-item" to="/login">
+          <NavLink className="main-nav-item" to="/signin">
             <Icon size="default" type="user" />
-            <span>Login</span>
+            <span>Sign In</span>
           </NavLink>
         
       </div>

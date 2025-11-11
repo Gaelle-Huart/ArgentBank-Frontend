@@ -1,12 +1,14 @@
 .icon {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: bottom;
 }
 
 .iconLarge {
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 
 .iconDefault {
-  margin-right: 0.5rem;
+  align-self: center;
+  justify-self: center;
+  margin-right: 0;
 }

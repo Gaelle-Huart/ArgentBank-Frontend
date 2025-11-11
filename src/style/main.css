@@ -13,6 +13,12 @@ body {
   min-height: 100vh;
 }
 
+#root {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
 .main {
   flex: 1;
 }
@@ -43,6 +49,8 @@ body {
 }
 
 .main-nav a {
+  display: inline-flex;
+  gap: 5px;
   font-weight: bold;
   color: #2c3e50;
 }
@@ -54,6 +62,7 @@ body {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  cursor: pointer;
 }
 
 .main-nav-item:hover {
@@ -156,10 +165,12 @@ body {
 .sign-in-button {
   display: block;
   width: 100%;
-  padding: 8px;
+  padding: 8px 0 8px 0;
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
+  cursor: pointer;
+  text-decoration: underline;
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
@@ -288,4 +299,45 @@ body {
   .transaction-button {
     width: 200px;
   }
+}
+
+.edit-form div {
+  background-color: #fff;
+  margin: 10px;
+}
+
+.edit-form label {
+  width: 100px;        
+  margin-right: 12px;  
+  text-align: right;
+}
+
+.edit-form h2 {
+  padding-top: 20px;
+  color: #2c3e50;
+}
+
+.save-edit, .cancel-edit {
+  border-color: #42b983;
+  background-color: #42b983;
+  color: #fff;
+  padding: 5px 20px;
+  width: 120px; 
+  text-align: center;
+  border-radius: 10px;
+  margin: 10px 5px 30px 5px;
+}
+
+.not-found {
+  box-sizing: border-box;
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  padding: 2rem;
+}
+
+.not-found h2 {
+  font-size: 2rem;
+  margin: 0 0 10px 0;
 }
