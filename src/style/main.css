@@ -341,3 +341,8 @@ body {
   font-size: 2rem;
   margin: 0 0 10px 0;
 }
+
+.error {
+  color: #5d2424;
+  margin-top: 10px;
+}

@@ -1,58 +1,72 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../redux/reducers/authSlice';
+
 import Icon from '../components/Icons';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';
-import LinkButton from '../components/LinkButton';
 
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const [setEmail] = useState('');
-  const [setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
-  const token = localStorage.getItem('autorisationToken') || sessionStorage.getItem('autorisationToken');
-
+  const dispatch = useDispatch();
+  const [ userData, setUserData ] = useState({ email: "", password: "", rememberMe: false })
+  const { error, token } = useSelector((state) => state.auth)
+  
+  const dispatchSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(userData))
+  }
 
   useEffect(() => {
-    if (token) {
-      navigate('/user');
+    if (token && token.length > 10) {
+      navigate('/user')
     }
-  }, [token, navigate]);
+  }, [token, navigate])
 
   return (
     <main className='main bg-dark'>
       <section className='sign-in-content'>
         <Icon size='default' type='user' />
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={dispatchSubmit}>
           <Input
-            id='username'
-            name='username'
-            label='Username'
+            id='email'
+            name='email'
+            label='Email'
             type='email'
-            autoComplete='username'
-            onChange={(e) => setEmail(e.target.value)}
+            autoComplete={'email'}
+            value={userData.email}
+            onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+            required
           />
           <Input
             id='password'
             name='password'
             label='Password'
             type='password'
-            autoComplete='current-password'
-            onChange={(e) => setPassword(e.target.value)}
+            autoComplete={'password'}
+            value={userData.password}
+            onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+            required
           />
           <Checkbox
             id='rememberMe'
             name='rememberMe'
             label='Remember me'
             type='checkbox'
-            checked={rememberMe}
-            onChange={(e) => setRememberMe(e.target.checked)}
+            checked={userData.rememberMe}
+            onChange={(e) => setUserData({ ...userData, rememberMe: e.target.checked })}
           />
-          <LinkButton type='submit' className='sign-in-button' >
+          <button type='submit' className='sign-in-button' >
             Sign In
-          </LinkButton>
+          </button>
+          {error && (
+            <div className='error'>
+              Erreur : {error.message || error.toString()}
+            </div>
+          )}
         </form>
       </section>
     </main>
