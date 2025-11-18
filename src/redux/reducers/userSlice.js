@@ -8,23 +8,26 @@ export const getUserProfile = createAsyncThunk(
     const token = thunkAPI.getState().auth.token
     if (!token) return thunkAPI.rejectWithValue('No token found')
     try {
-      const profile = await bankAPI.getProfile(token)
-      console.log("API response:", profile)
-      return profile?.body || profile
+      const answer = await bankAPI.getProfile(token)
+      console.log('getUserProfile API answer:', answer)
+      return {
+        profile: answer?.body || answer
+      }
     } catch (err) {
       return thunkAPI.rejectWithValue(err)
     }
-  }
+  } 
 );
 
 export const updateUserProfile = createAsyncThunk(
   'user/updateUserProfile',
-  async (profileData, thunkAPI) => {
-    const token = thunkAPI.getState().auth.token
-    if (!token) return thunkAPI.rejectWithValue('No token found')
+  async (profile, token, thunkAPI) => {
     try {
-      const answer = await bankAPI.updateUserProfile(profileData, token)
-      return answer?.body || answer
+      const answer = await bankAPI.updateUserProfile(profile, token)
+      console.log('updateUserProfile API answer:', answer)
+      return {
+        profile: answer?.body || answer
+      }
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message || err)
     }
@@ -43,16 +46,17 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getUserProfile.pending, (state) => {
-        state.loading = 'idle'
+        state.loading = true
       })
       .addCase(getUserProfile.fulfilled, (state, action) => {
+        state.profile = action.payload
         state.loading = false
-        state.profile = action.payload.body || action.payload || null
-        console.log(action.payload)
+        console.log('getUserProfile case fulfilled :', action.payload)
       })
       .addCase(getUserProfile.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload || action.error.message
+        console.log('getUserProfile case rejected :', state, action)
       })
       .addCase(updateUserProfile.pending, (state) => {
         state.loading = true

@@ -7,91 +7,84 @@ import Card from '../components/Card';
 
 
 function User() {
+  const token = useSelector((state) => state.auth.token)
   const dispatch = useDispatch()
-  const [isEditing, setIsEditing] = useState(false)
+  const [editing, setEditing] = useState(false)
+  const profile = useSelector((state) => state.user.profile)
 
-  const token = useSelector(state => state.auth.token)
-  const loading = useSelector(state => state.user.loading)
-  const profile = useSelector(state => state.user.profile)
-  const error = useSelector(state => state.user.error)
-  
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
+  const [firstName] = useState("")
+  const [lastName] = useState("")
   const [userName, setUserName] = useState("")
 
   useEffect(() => {
-    if (profile) {
-      setUserName(profile.userName ?? '')
-      setFirstName(profile.firstName ?? '')
-      setLastName(profile.lastName ?? '')
-    }
-  }, [profile])
-
-  //rajout de token au troisième if, enlever si problème ; enlever if(!loading) pour voir ce que ça donne
-  useEffect(() => {
-    if (!token) return
-    if (!loading) return
-    if (token && !profile) {
+    if (token) {
       dispatch(getUserProfile())
-    }
-  }, [dispatch, token, profile, loading])
+    };
+  }, [token, dispatch])
+
+  // useEffect(() => {
+  //   if (profile) {
+  //     setUserName(profile.userName ?? '')
+  //     setFirstName(profile.firstName ?? '')
+  //     setLastName(profile.lastName ?? '')
+  //   }
+  // }, [profile])
+  // console.log('useEffect profile:', profile.userName, profile.firstName, profile.lastName)
 
   if (!token) return <div>Please log in</div>
-  if (loading) return <div>Loading profile...</div>
   if (!profile) return <div>Profile not found</div>
-  if (error) return <div>Error: {error.toString()}</div>
 
-  const onSubmit = async (e) => {
+  const usernameSubmit = async (e) => {
     e.preventDefault()
     await dispatch(updateUserProfile({ userName, firstName, lastName }))
-    setIsEditing(false)
+    setEditing(false)
   }
 
   return (
     <main className='main bg-dark'>
-      {isEditing && (
+      {editing && (
         <div className='edit-form'>
           <h2 className='title'>Edit user info</h2>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={usernameSubmit}>
             <div>
-              <label>User name:</label>
+              <label htmlFor='userName'>User name:</label>
               <Input
                 type='text'
-                value={userName}
-                onChange={e => setUserName(e.target.value)}
+                defaultValue={profile.userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
             <div>
-              <label>First name:</label>
+              <label htmlFor='firstName'>First name:</label>
               <Input
                 type='text'
-                value={firstName}
+                defaultValue={profile.firstName}
                 readOnly
                 disabled
               />
             </div>
             <div>
-              <label>Last name:</label>
+              <label htmlFor='lastName'>Last name:</label>
               <Input
                 type='text'
-                value={lastName}
+                defaultValue={profile.lastName}
                 readOnly
                 disabled
               />
             </div>
             <Button type='submit' className='save-edit'>Save</Button>
-            <Button type='button' className='cancel-edit' onClick={() => setIsEditing(false)}>Cancel</Button>
+            <Button type='button' className='cancel-edit' onClick={() => setEditing(false)}>Cancel</Button>
           </form>
         </div>
       )}
     
-      {!isEditing && (
-        <div className='header'>
+      {!editing && (
+        <div className='welcome'>
           <h1 className='title'>
             Welcome back<br />
-            {firstName} {lastName} !
+            {profile.firstName} {profile.lastName} !
           </h1>
-          <Button className='edit-button' onClick={() => setIsEditing(true)}>Edit Name</Button>
+          <Button className='edit-button' onClick={() => setEditing(true)}>Edit Name</Button>
         </div>
       )}
     

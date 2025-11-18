@@ -6,6 +6,7 @@ import { login } from '../redux/reducers/authSlice';
 import Icon from '../components/Icons';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';
+import Button from '../components/Button';
 
 
 const SignIn = () => {
@@ -59,12 +60,12 @@ const SignIn = () => {
             checked={userData.rememberMe}
             onChange={(e) => setUserData({ ...userData, rememberMe: e.target.checked })}
           />
-          <button type='submit' className='sign-in-button' >
+          <Button type='submit' className='sign-in-button' onClick>
             Sign In
-          </button>
+          </Button>
           {error && (
             <div className='error'>
-              Erreur : {error.message || error.toString()}
+              {error.message || error.toString()}
             </div>
           )}
         </form>
