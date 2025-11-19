@@ -7,36 +7,32 @@ import Card from '../components/Card';
 
 
 function User() {
-  const token = useSelector((state) => state.auth.token)
-  const dispatch = useDispatch()
-  const [editing, setEditing] = useState(false)
-  const profile = useSelector((state) => state.user.profile)
-
-  const [firstName] = useState("")
-  const [lastName] = useState("")
-  const [userName, setUserName] = useState("")
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+  const [editing, setEditing] = useState(false);
+ 
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     if (token) {
       dispatch(getUserProfile())
     };
-  }, [token, dispatch])
+  }, [token, dispatch]);
 
-  // useEffect(() => {
-  //   if (profile) {
-  //     setUserName(profile.userName ?? '')
-  //     setFirstName(profile.firstName ?? '')
-  //     setLastName(profile.lastName ?? '')
-  //   }
-  // }, [profile])
-  // console.log('useEffect profile:', profile.userName, profile.firstName, profile.lastName)
+  const profile = useSelector((state) => state.user.profile)
 
+  useEffect(() => {
+    if (profile) {
+      setUserName(profile.userName)
+    }
+  }, [profile, setUserName])
+  
   if (!token) return <div>Please log in</div>
   if (!profile) return <div>Profile not found</div>
 
   const usernameSubmit = async (e) => {
     e.preventDefault()
-    await dispatch(updateUserProfile({ userName, firstName, lastName }))
+    await dispatch(updateUserProfile({ userName }))
     setEditing(false)
   }
 
@@ -46,32 +42,35 @@ function User() {
         <div className='edit-form'>
           <h2 className='title'>Edit user info</h2>
           <form onSubmit={usernameSubmit}>
-            <div>
-              <label htmlFor='userName'>User name:</label>
-              <Input
-                type='text'
-                defaultValue={profile.userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor='firstName'>First name:</label>
-              <Input
-                type='text'
-                defaultValue={profile.firstName}
-                readOnly
-                disabled
-              />
-            </div>
-            <div>
-              <label htmlFor='lastName'>Last name:</label>
-              <Input
-                type='text'
-                defaultValue={profile.lastName}
-                readOnly
-                disabled
-              />
-            </div>
+            <Input
+              label='User name:'
+              type='text'
+              id='username'
+              value={profile.userName}
+              onChange={(e) => setUserName(e.target.value)}
+              autoComplete={profile.userName}
+              placeholder={profile.userName}
+            />
+            <Input
+              label='First name:'
+              type='text'
+              id='firsname'
+              value={profile.firstName}
+              autoComplete={profile.firstName}
+              placeholder={profile.firstName}
+              readOnly
+              disabled
+            />
+            <Input
+              label='Last name:'
+              type='text'
+              id='lastname'
+              value={profile.lastName}
+              autoComplete={profile.lastName}
+              placeholder={profile.lastName}
+              readOnly
+              disabled
+            />
             <Button type='submit' className='save-edit'>Save</Button>
             <Button type='button' className='cancel-edit' onClick={() => setEditing(false)}>Cancel</Button>
           </form>

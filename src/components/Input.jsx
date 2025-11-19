@@ -7,6 +7,8 @@ const Input = ({
   value,
   autoComplete,
   placeholder,
+  readOnly,
+  disabled,
 }) => {
 
   return (
@@ -20,6 +22,8 @@ const Input = ({
         onChange={onChange}
         autoComplete={autoComplete}
         placeholder={placeholder}
+        readOnly={readOnly}
+        disabled={disabled}
       />
     </div>
   );

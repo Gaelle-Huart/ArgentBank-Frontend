@@ -9,25 +9,21 @@ export const getUserProfile = createAsyncThunk(
     if (!token) return thunkAPI.rejectWithValue('No token found')
     try {
       const answer = await bankAPI.getProfile(token)
-      console.log('getUserProfile API answer:', answer)
-      return {
-        profile: answer?.body || answer
-      }
+      return answer.body;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err)
+      return thunkAPI.rejectWithValue(err.message || err)
     }
   } 
 );
 
 export const updateUserProfile = createAsyncThunk(
   'user/updateUserProfile',
-  async (profile, token, thunkAPI) => {
+  async (profileData, thunkAPI) => {
+    const token = thunkAPI.getState().auth.token;
+    if (!token) return thunkAPI.rejectWithValue('No token found');
     try {
-      const answer = await bankAPI.updateUserProfile(profile, token)
-      console.log('updateUserProfile API answer:', answer)
-      return {
-        profile: answer?.body || answer
-      }
+      const answer = await bankAPI.updateUserProfile(profileData, token)
+      return answer.body
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message || err)
     }
@@ -45,19 +41,19 @@ const userSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
+      // GET PROFILE
       .addCase(getUserProfile.pending, (state) => {
         state.loading = true
       })
       .addCase(getUserProfile.fulfilled, (state, action) => {
         state.profile = action.payload
         state.loading = false
-        console.log('getUserProfile case fulfilled :', action.payload)
       })
       .addCase(getUserProfile.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload || action.error.message
-        console.log('getUserProfile case rejected :', state, action)
       })
+      // UPDATE PROFILE
       .addCase(updateUserProfile.pending, (state) => {
         state.loading = true
         state.error = null

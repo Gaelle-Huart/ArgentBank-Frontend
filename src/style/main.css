@@ -200,8 +200,8 @@ body {
 .input-wrapper {
   display: flex;
   flex-direction: column;
-  text-align: left;
-  margin-bottom: 1rem;
+  text-align: center;
+  padding: 0.5rem;
 }
 
 .input-wrapper label {
@@ -288,9 +288,9 @@ body {
 }
 
 @media (min-width: 720px) {
-  /* .account {
+  .account {
     flex-direction: row;
-  } */
+  }
 
   .account-content-wrapper.cta {
     flex: 0;
@@ -302,7 +302,7 @@ body {
 }
 
 .edit-form div {
-  width: 40%;
+  width: 30%;
   background-color: #fff;
   margin: 10px auto;
 }
