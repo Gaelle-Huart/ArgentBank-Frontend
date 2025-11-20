@@ -29,7 +29,7 @@ const SignIn = () => {
   return (
     <main className='main bg-dark'>
       <section className='sign-in-content'>
-        <Icon size='default' type='user' />
+        <Icon size='large' type='user' />
         <h1>Sign In</h1>
         <form onSubmit={dispatchSubmit}>
           <Input

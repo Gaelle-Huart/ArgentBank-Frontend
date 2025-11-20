@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { updateUserProfile, getUserProfile } from '../redux/reducers/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { validUserName } from '../tools/Regex';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Card from '../components/Card';
@@ -32,8 +34,13 @@ function User() {
 
   const usernameSubmit = async (e) => {
     e.preventDefault()
-    await dispatch(updateUserProfile({ userName }))
-    setEditing(false)
+    if (!validUserName(userName)) {
+      alert("Nom invalide (autorisé: lettres, ' et -)");
+      return;
+    } else {
+      await dispatch(updateUserProfile({ userName }))
+      setEditing(false)
+    }
   }
 
   return (
@@ -42,35 +49,37 @@ function User() {
         <div className='edit-form'>
           <h2 className='title'>Edit user info</h2>
           <form onSubmit={usernameSubmit}>
-            <Input
-              label='User name:'
-              type='text'
-              id='username'
-              value={profile.userName}
-              onChange={(e) => setUserName(e.target.value)}
-              autoComplete={profile.userName}
-              placeholder={profile.userName}
-            />
-            <Input
-              label='First name:'
-              type='text'
-              id='firsname'
-              value={profile.firstName}
-              autoComplete={profile.firstName}
-              placeholder={profile.firstName}
-              readOnly
-              disabled
-            />
-            <Input
-              label='Last name:'
-              type='text'
-              id='lastname'
-              value={profile.lastName}
-              autoComplete={profile.lastName}
-              placeholder={profile.lastName}
-              readOnly
-              disabled
-            />
+            <div className='edit-form-content'>
+              <Input
+                label='User name:'
+                type='text'
+                id='username'
+                value={userName}
+                onChange={e => setUserName(e.target.value)}
+                autoComplete={profile.userName}
+                placeholder={profile.userName}
+              />
+              <Input
+                label='First name:'
+                type='text'
+                id='firsname'
+                value={profile.firstName}
+                autoComplete={profile.firstName}
+                placeholder={profile.firstName}
+                readOnly
+                disabled
+              />
+              <Input
+                label='Last name:'
+                type='text'
+                id='lastname'
+                value={profile.lastName}
+                autoComplete={profile.lastName}
+                placeholder={profile.lastName}
+                readOnly
+                disabled
+              />
+            </div>
             <Button type='submit' className='save-edit'>Save</Button>
             <Button type='button' className='cancel-edit' onClick={() => setEditing(false)}>Cancel</Button>
           </form>

@@ -18,7 +18,7 @@ const Input = ({
         type={type}
         id={id}
         checked={type === 'checkbox' ? checked : undefined}
-        value={type !== 'checkbox' ? value : undefined}
+        value={type === 'text' ? value : undefined}
         onChange={onChange}
         autoComplete={autoComplete}
         placeholder={placeholder}

@@ -5,9 +5,11 @@
 
 .iconLarge {
   margin-bottom: 0rem;
+  cursor: pointer;
 }
 
 .iconDefault {
   align-self: center;
   justify-self: center;
+  cursor: pointer;
 }
