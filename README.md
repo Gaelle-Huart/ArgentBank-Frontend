@@ -1,7 +1,7 @@
-# ArgentBank, Application bancaire
+# **ArgentBank**, application bancaire
 
-ArgentBank est une application bancaire qui permet aux utilisateurs de se connecter, de consulter leurs comptes, de modifier leurs informations personnelles (username), et qui à terme, permettra de modifier les informations de transaction liées à ces mêmes comptes.
-Le projet est basé sur React, avec redux pour gérer le state local.
+**ArgentBank** est une application bancaire qui permet aux utilisateurs de se connecter, de consulter leurs comptes, de modifier leurs informations personnelles (_username_), et qui à terme, permettra de modifier les informations de transaction liées à ces mêmes comptes.  
+Le projet est basé sur **React**, avec **redux** pour gérer le _state_ local.
 
 ## Table des matières
 
@@ -87,20 +87,19 @@ npm run dev
 ## Les fonctionalités
 
 - Connexion/déconnexion des utilisateurs
-- Authentification des utilisateurs
-- Gestion des comptes utilisateurs
-- UI changeante entre non connecté et connecté
-- Application entièrement responsive (en cours)
+- Authentification des utilisateurs (_token_)
+- L'UI s'adapte si connecté (_nav_)
+- Application entièrement _responsive_ (en cours)
 
 ## Les plus
 
 ### Les regex
 
 L'ajout de regex (optionnel) semblait être une addition intéressante :
-- civilianNameRegex pour contrôler les noms et prénoms (nouvel utilisateur)
-- userNameRegex pour contrôler le changement de username (tous les utilisateurs)
-- mailRegex pour contrôler les emails renseignés (nouvel utilisateur)
-- passwordRegex pour contrôler les mots de passe renseignés (nouvel utilisateur)
+- _civilianNameRegex_ pour contrôler les _noms_ et _prénoms_ (nouvel utilisateur)
+- _userNameRegex_ pour contrôler le changement de _username_ (tous les utilisateurs)
+- _mailRegex_ pour contrôler les _emails_ renseignés (nouvel utilisateur)
+- _passwordRegex_ pour contrôler les _mots de passe_ renseignés (nouvel utilisateur)
 
 ### Green Code
 
@@ -116,5 +115,5 @@ L'ajout de regex (optionnel) semblait être une addition intéressante :
 
 ## Pour aller plus loin
 
-L'application pourrait avoir besoin d'un composant Register.jsx afin de permettre à de nouveaux utilisateurs de créer un compte sur l'application. Afin de limiter cette possibilité aux seuls possésseurs de comptes chez ArgentBank, on pourrait imaginer un formulaire classique (nom, prénom, email, mot de passe, etc) auquel on rajouterait un champ "registerKey", code à usage unique (par exemple xxxx-xxxx-xxxx) envoyé directement à l'utilisateur afin de lui permettre de s'enregistrer.
-Dans cette perspective, une regex supplémentaire serait nécessaire pour contrôler le code en question. Il faudrait aussi l'inclure dans la base de données pour permettre l'enregistrement lors de la requête, dans un soucis de sécurité supplémentaire.
+L'application pourrait avoir besoin d'un composant **Register.jsx** afin de permettre à de nouveaux utilisateurs de créer un compte sur l'application. Afin de limiter cette possibilité aux seuls possésseurs de comptes chez **ArgentBank**, on pourrait imaginer un formulaire classique (nom, prénom, email, mot de passe, etc) auquel on rajouterait un _champ "registerKey"_. Ce dernier servant à renseigner un code à usage unique (par exemple xxxx-xxxx-xxxx) envoyé directement à l'utilisateur afin de lui permettre de s'enregistrer.  
+Dans cette perspective, une _regex_ supplémentaire serait nécessaire pour contrôler le code en question. Il faudrait aussi l'inclure dans la base de données pour permettre l'enregistrement lors de la requête, dans un soucis de sécurité supplémentaire.
