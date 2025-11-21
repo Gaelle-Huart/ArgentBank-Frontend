@@ -42,7 +42,7 @@ Le projet est basé sur **React**, avec **redux** pour gérer le _state_ local.
 
 ## Guide d'utilisation
 
-### 1.Le backend
+### 1. Le backend
 
 Première installation :
 ```bash
@@ -51,7 +51,7 @@ cd Argentbank-Backend
 nvm use ...
 # installe les dépendances
 npm install
-# démmarre le serveur sur le port correspondant (3001)
+# démarre le serveur sur le port correspondant (3001)
 npm run dev:server
 # peuple la base de données avec les deux profils (Tony et Steve)
 npm run populate-db
@@ -64,16 +64,16 @@ nvm use 12.22.12
 npm run dev:server
 ```
 
-### 2.Le frontend
+### 2. Le frontend
 
 Première installation :
 ```bash
 cd Argentbank-Frontend
-# installation de react+vite, react-redus, reduxjs/toolkit, nvm, etc...
+# installation de react+vite, react-redux, reduxjs/toolkit, nvm, etc...
 npm install ...
 # changement de version Node
 nvm use ...
-# lance le développement en temps réel
+# lance le développement en temps réel sur le port correspondant (5173)
 npm run dev
 ```
 
