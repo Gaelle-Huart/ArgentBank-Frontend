@@ -65,7 +65,6 @@ body {
 
 .main-nav-item {
   text-decoration: none;
-  margin-right: 0.5rem;
 }
 
 .main-nav-item:hover {
@@ -360,4 +359,16 @@ body {
 .error {
   color: #5d2424;
   margin-top: 10px;
+}
+
+@media (max-width: 520px) {
+  .main-nav {
+    padding: 0 4px 0 0;
+  }
+  .main-nav-icons {
+    gap: 8px;
+  }
+  .account {
+    flex-direction: column;
+  }
 }
