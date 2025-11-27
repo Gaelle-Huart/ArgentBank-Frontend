@@ -9,7 +9,6 @@ export const login = createAsyncThunk(
       const answer = await bankAPI.login(userData);
       const token = answer.token || answer.body?.token || null
       if (token) localStorage.setItem('token', token)
-      console.log('login token :', token)
       return {
         token: answer.token || answer.body?.token || null,
       };
@@ -45,7 +44,6 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         state.token = action.payload.token;
-        console.log('login fulfilled :', state, action);
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
