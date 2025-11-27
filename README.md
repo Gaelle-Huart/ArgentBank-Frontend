@@ -1,6 +1,6 @@
 # **ArgentBank**, application bancaire
 
-**ArgentBank** est une application bancaire qui permet aux utilisateurs de se connecter, de consulter leurs comptes, de modifier leurs informations personnelles (_username_), et qui à terme, permettra de modifier les informations de transaction liées à ces mêmes comptes.  
+**ArgentBank** est une application bancaire qui permet aux utilisateurs de se connecter, de consulter leurs comptes, de modifier leurs informations personnelles (_username_), et qui à terme, permettra de modifier les informations des transactions liées à ces mêmes comptes.  
 Le projet est basé sur **React**, avec **redux** pour gérer le _state_ local.
 
 ## Table des matières
@@ -89,7 +89,7 @@ npm run dev
 - Connexion/déconnexion des utilisateurs
 - Authentification des utilisateurs (_token_)
 - L'UI s'adapte si connecté (_nav_)
-- Application entièrement _responsive_ (en cours)
+- Application entièrement _responsive_
 
 ## Les plus
 
@@ -103,14 +103,14 @@ L'ajout de regex (optionnel) semblait être une addition intéressante :
 
 ### Green Code
 
-- Images et assets optimisés
-- Utilisation de redux pour le cache local
-- Lazy loading des composants
+- Images et assets optimisés (webp, plus léger)
+- Utilisation de redux pour le cache local (moins de code)
+- Possibilité de lazy loading sur les composants dans le futur
 
 ### Redux Best Practices
 
 - Requêtes API centralisées
-- Utilisation de slices
+- Utilisation de slices (auth et user)
 - Gestion d'état optimisée
 
 ## Pour aller plus loin
