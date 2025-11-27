@@ -60,7 +60,7 @@ const SignIn = () => {
             checked={userData.rememberMe}
             onChange={(e) => setUserData({ ...userData, rememberMe: e.target.checked })}
           />
-          <Button type='submit' className='sign-in-button' onClick>
+          <Button type='submit' className='sign-in-button' onClick={() => onclick}>
             Sign In
           </Button>
           {error && (
