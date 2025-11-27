@@ -7,7 +7,7 @@ function Error() {
       <section className='not-found'>
         <h2>404</h2>
         <Icon size='large' type='oups' />
-        <p>Oups, la page est introuvable.</p>
+        <p>Woops, something went wrong.</p>
         <LinkButton href='/' className='sign-in-button'>
           Home
         </LinkButton>
