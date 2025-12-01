@@ -62,7 +62,7 @@ function User() {
               <Input
                 label='First name:'
                 type='text'
-                id='firsname'
+                id='firstname'
                 value={profile.firstName}
                 autoComplete={profile.firstName}
                 placeholder={profile.firstName}

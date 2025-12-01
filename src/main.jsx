@@ -7,7 +7,6 @@ import './style/main.css';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-localStorage.removeItem('token'); //nettoyage du token (tests des données user et évite les boucles de redirection)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
